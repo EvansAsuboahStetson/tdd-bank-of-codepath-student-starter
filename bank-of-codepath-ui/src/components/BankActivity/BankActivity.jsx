@@ -23,6 +23,7 @@ export default function BankActivity({ transactions, transfers }) {
         </div>
         {/* */}
         {transactions?.map((transaction, idx) => {
+          console.log(transaction.id)
           return (
             <Link to={`/transactions/${transaction.id}`}>
               <TransactionRow
@@ -47,7 +48,7 @@ export default function BankActivity({ transactions, transfers }) {
         {transfers?.map((transfer, idx) => {
             
           return (
-            <TransferRow key={idx} className="transfer-row" transfer={transfer}/>
+            <TransferRow key={idx} className="transfer-row" transfer={transfer} />
           )
           })}
       </div>
