@@ -12,8 +12,7 @@ export default function AddTransaction({
   let handleOnFormFieldChange = (event) => {
     const { name, value } = event.target
     
-      setForm(current => ({
-        ...current, [name]: value
+      setForm(current => ({...current, [name]: value
       }))
     
 

@@ -25,7 +25,7 @@ export default function Home({
     axios
       .get("http://localhost:3001/bank/transactions")
       .then((response) => {
-        console.log("response,transactoins", response.data.transactions);
+
         setTransactions(response.data.transactions);
       })
       .catch((err) => {
@@ -37,7 +37,8 @@ export default function Home({
     axios
       .get("http://localhost:3001/bank/transfers")
       .then((response) => {
-        console.log(response.data.transfers);
+
+        setTransfers(response.data.transfers)
       })
       .catch((err) => {
         setError(err);
@@ -56,7 +57,7 @@ export default function Home({
   };
   filteredTransactions = filterTransactions(transactions);
 
-  console.log(filteredTransactions);
+
 
   const handleOnSubmitNewTransaction = () => { 
     handleOnCreateTransaction()
@@ -64,15 +65,16 @@ export default function Home({
   
   const handleOnCreateTransaction = async() => {
     setIsCreating(true)
-   axios.post('http://localhost:3001/bank/transactions', {
+   await axios.post('http://localhost:3001/bank/transactions', {
       transactions: newTransactionForm 
      
     }
     ).then(function (response)
     {
-      setTransactions(current=>[...current,response.data.transaction])
+
+       setTransactions(current=>[...current,response.data.transaction])
       
-      console.log(response)
+      
     }).catch(function (error)
     {
       console.log(error)
@@ -85,6 +87,7 @@ export default function Home({
     setIsCreating(false)
     
   }
+    console.log(transfers);
 
   return (
     <div className="home">
@@ -96,7 +99,7 @@ export default function Home({
         handleOnSubmit={handleOnSubmitNewTransaction}
       />
       {!isLoading ? (
-        <BankActivity transactions={filteredTransactions} />
+        <BankActivity transactions={filteredTransactions} transfers={transfers?transfers:[]} />
       ) : (
         <h1>Loading...</h1>
       )}
